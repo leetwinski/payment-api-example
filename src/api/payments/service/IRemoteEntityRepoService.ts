@@ -1,6 +1,6 @@
 import { ApiResult } from "../apitype";
 
-export default interface IRemoteEntityRepoService<TEntity, TCreationData, TID> {
+export default interface IRemoteEntityRepoService<TEntity, TCreationData, TID = string> {
   list(): PromiseLike<ApiResult<TEntity[]>>;
   create(data: TCreationData): PromiseLike<ApiResult<TEntity>>;
   delete(id: TID): PromiseLike<ApiResult<void>>;

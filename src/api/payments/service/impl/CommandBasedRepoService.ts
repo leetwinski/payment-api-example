@@ -2,7 +2,7 @@ import IRemoteEntityRepoService from "../IRemoteEntityRepoService";
 import ICommand from "../../command/ICommand";
 import { ApiResult } from "../../apitype";
 
-export default abstract class CommandBasedRepoService<TEntity, TCreationData, TID = string>
+export default class CommandBasedRepoService<TEntity, TCreationData, TID = string>
   implements IRemoteEntityRepoService<TEntity, TCreationData, TID> {
     constructor(
       private createCommand: ICommand<ApiResult<TEntity>, TCreationData>,
