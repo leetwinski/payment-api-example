@@ -6,15 +6,15 @@ import AppError from "../../error/ApiError";
 import IApiRequestContext from "./IApiRequestContext";
 
 export default class ApiRequestCommand<TRequest, THeaders, TResponse>
-  implements ICommand<ApiResult<TResponse>, IApiRequestContext<TRequest, THeaders, TResponse>> {
+  implements ICommand<ApiResult<TResponse>, IApiRequestContext<TRequest, THeaders>> {
 
     constructor(
       private method: 'GET' | 'POST' | 'PUT' | 'DELETE',
-      public ctx: IApiRequestContext<TRequest, THeaders, TResponse>) {}
+      public ctx: IApiRequestContext<TRequest, THeaders>) {}
 
     exec(): PromiseLike<ApiResult<TResponse>> {
       const opts = {
-        uri: this.ctx.url,
+        url: this.ctx.url,
         method: this.method,
         json: true,
         headers: this.ctx.headers,
@@ -37,7 +37,7 @@ export default class ApiRequestCommand<TRequest, THeaders, TResponse>
       return new ApiRequestCommand(this.method, this.ctx) as this;
     }
 
-    withCtx(ctx: IApiRequestContext<TRequest, THeaders, TResponse>): this {
+    withCtx(ctx: IApiRequestContext<TRequest, THeaders>): this {
       this.ctx = ctx;
       return this;
     }
