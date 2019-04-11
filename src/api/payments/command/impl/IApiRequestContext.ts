@@ -1,6 +1,5 @@
-export default interface IApiRequestContext<TRequest, THeaders, TResponse, TResult> {
+export default interface IApiRequestContext<TRequest, THeaders, TResponse> {
   url: string;
   headers: THeaders;
   body: TRequest;
-  converter: (val: TResponse) => TResult;
 }

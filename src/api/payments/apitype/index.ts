@@ -4,56 +4,42 @@ import ApiError from "../error/ApiError";
 export type ErrorCode = "ERR_UNATHORIZED" | "ERR_AUTH_TOKEN_EXPIRED" | "ERR_VALIDATION" | "ERR_CANNOT_APPROVE" | "ERR_CANNOT_CANCEL" | "ERR_REQUEST";
 
 export interface ErrorResponse {
-  code: ErrorCode;
-  message: string;
+  readonly code: ErrorCode;
+  readonly message: string;
 }
 
 export interface AuthRequest {
-  username: string;
-  passwort: string;
+  readonly username: string;
+  readonly passwort: string;
 }
 
 export interface AuthResponse {
-  authToken: string;
-  expiresIn: string;
+  readonly authToken: string;
+  readonly expiresIn: string;
 }
 
 export interface CreatePaymentRequest {
-  payeeId: string;
-  payerId: string;
-  paymentSystem: string;
-  paymentMethod: string;
-  amount: number;
-  currency: string;
-  comment: string;
+  readonly payeeId: string;
+  readonly payerId: string;
+  readonly paymentSystem: string;
+  readonly paymentMethod: string;
+  readonly amount: number;
+  readonly currency: string;
+  readonly comment: string;
 }
 
 export interface PaymentResponse {
-  id: string;
-  payeeId: string;
-  payerId: string;
-  paymentSystem: string;
-  paymentMethod: string;
-  amount: number;
-  currency: string;
-  status: string;
-  comment: string | null;
-  created: string;
-  updated: string;
-}
-
-export interface Payment {
-  id: string;
-  payeeId: string;
-  payerId: string;
-  paymentSystem: string;
-  paymentMethod: string;
-  amount: number;
-  currency: string;
-  status: string;
-  comment: string | null;
-  created: Date;
-  updated: Date;
+  readonly id: string;
+  readonly payeeId: string;
+  readonly payerId: string;
+  readonly paymentSystem: string;
+  readonly paymentMethod: string;
+  readonly amount: number;
+  readonly currency: string;
+  readonly status: string;
+  readonly comment: string | null;
+  readonly created: string;
+  readonly updated: string;
 }
 
 export type ApiResult<TResult> = Result<TResult, ApiError>;
