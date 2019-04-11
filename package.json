@@ -9,13 +9,11 @@
   "author": "leetwin",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^11.13.2",
-    "@types/request": "^2.48.1",
     "@types/request-promise": "^4.1.42",
-    "request-promise": "^4.2.4",
-    "ts-node": "^8.0.3"
+    "ts-node": "^8.0.3",
+    "typescript": "^3.4.3"
   },
   "dependencies": {
-    "request": "^2.88.0"
+    "request-promise": "^4.2.4"
   }
 }

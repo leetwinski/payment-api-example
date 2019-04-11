@@ -4,9 +4,10 @@
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
-    "outFile": "../../built/local/tsc.js",
+    "outFile": "./build/local/dist.js",
     "sourceMap": true,
-    "lib": [ "es2015" ]    
+    "lib": [ "es2015" ],
+    "moduleResolution": "node"    
   },
   "include": [
     "src/**/*"
