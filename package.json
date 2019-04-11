@@ -1,0 +1,21 @@
+{
+  "name": "payments-api",
+  "version": "0.0.1",
+  "description": "simple payments api example",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "leetwin",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^11.13.2",
+    "@types/request": "^2.48.1",
+    "@types/request-promise": "^4.1.42",
+    "request-promise": "^4.2.4",
+    "ts-node": "^8.0.3"
+  },
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
