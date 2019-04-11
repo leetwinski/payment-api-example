@@ -18,11 +18,6 @@ export interface AuthResponse {
   expiresIn: string;
 }
 
-export interface Auth {
-  authToken: string;
-  expiresIn: Date;
-}
-
 export interface CreatePaymentRequest {
   payeeId: string;
   payerId: string;

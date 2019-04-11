@@ -2,7 +2,7 @@ import IRemoteEntityRepoService from "../IRemoteEntityRepoService";
 import ICommand from "../../command/ICommand";
 import { ApiResult } from "../../apitype/index";
 
-export default class CommandBasedRepoService<TEntity, TCreationData, TID>
+export default class CommandBasedRepoService<TEntity, TCreationData, TID = string>
   implements IRemoteEntityRepoService<TEntity, TCreationData, TID> {
     constructor (
       private createCommand: ICommand<ApiResult<TEntity>, TCreationData>,
@@ -10,7 +10,7 @@ export default class CommandBasedRepoService<TEntity, TCreationData, TID>
       private listCommand: ICommand<ApiResult<TEntity[]>>,
       private deleteCommand: ICommand<ApiResult<void>, TID>
     ) {}
-
+    
     list(): PromiseLike<ApiResult<TEntity[]>> {
       return this.listCommand.clone().exec();
     }
