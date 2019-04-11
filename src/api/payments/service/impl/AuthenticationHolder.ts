@@ -1,4 +1,4 @@
-import { AuthResponse } from "../../apitype/index";
+import { AuthResponse } from "../../apitype";
 
 export default class AuthenicationHolder {
   private expiration: number;

@@ -1,4 +1,4 @@
-// import { ApiResult, Auth } from "./apitype/index";
+// import { ApiResult, Auth } from "./apitype";
 
 export default class Api {
   //  const payment

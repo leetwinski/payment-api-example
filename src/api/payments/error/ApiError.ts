@@ -1,4 +1,4 @@
-import { ErrorCode } from "../apitype/index";
+import { ErrorCode } from "../apitype";
 
 export default class ApiError extends Error {
   constructor(readonly code: ErrorCode, readonly message: string) {

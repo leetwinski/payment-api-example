@@ -1,6 +1,6 @@
 import IRemoteEntityRepoService from "../IRemoteEntityRepoService";
 import ICommand from "../../command/ICommand";
-import { ApiResult } from "../../apitype/index";
+import { ApiResult } from "../../apitype";
 
 export default abstract class CommandBasedRepoService<TEntity, TCreationData, TID = string>
   implements IRemoteEntityRepoService<TEntity, TCreationData, TID> {

@@ -1,4 +1,4 @@
-import { AuthRequest, ApiResult, AuthResponse } from "../apitype/index";
+import { AuthRequest, ApiResult, AuthResponse } from "../apitype";
 
 export interface IAuthService {
   discardAuth(): void;

@@ -1,6 +1,6 @@
 import ICommand from "../ICommand";
 import Result from "../../util/Result";
-import { ApiResult } from "../../apitype/index";
+import { ApiResult } from "../../apitype";
 import request from 'request-promise';
 import AppError from "../../error/ApiError";
 import IApiRequestContext from "./IApiRequestContext";
@@ -33,8 +33,8 @@ export default class ApiRequestCommand<TRequest, THeaders, TResponse>
       }).catch((ex: Error) => Result.err<TResponse, AppError>(new AppError('ERR_REQUEST', ex.message)))
     }
 
-    clone<T extends ApiRequestCommand<TRequest, THeaders, TResponse>>(): T {
-      return new ApiRequestCommand(this.method, this.ctx) as T;
+    clone(): this {
+      return new ApiRequestCommand(this.method, this.ctx) as this;
     }
 
     withCtx(ctx: IApiRequestContext<TRequest, THeaders, TResponse>): this {
