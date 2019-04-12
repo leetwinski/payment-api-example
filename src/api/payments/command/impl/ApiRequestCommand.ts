@@ -20,13 +20,13 @@ export default class ApiRequestCommand<TRequest, THeaders, TResponse>
   public exec (ctx: IApiRequestContext<TRequest, THeaders>): PromiseLike<ApiResult<TResponse>> {
     const opts = {
       baseUrl: this.baseUrl,
-      uri: this.makeUri(ctx.body),
-      method: this.method,
-      json: true,
-      headers: ctx.headers,
       body: ctx.body,
+      headers: ctx.headers,
+      json: true,
+      method: this.method,
+      resolveWithFullResponse: true,
       simple: false,
-      resolveWithFullResponse: true
+      uri: this.makeUri(ctx.body)
     }
 
     return request(opts).then((response) => {
