@@ -1,5 +1,5 @@
-import { AuthRequest, ApiResult, AuthResponse } from "../apitype";
+import { ApiResult, AuthRequest, AuthResponse } from '../apitype'
 
 export interface IAuthService {
-  authenticate(req: AuthRequest): PromiseLike<ApiResult<AuthResponse>>;
+  authenticate (req: AuthRequest): PromiseLike<ApiResult<AuthResponse>>
 }

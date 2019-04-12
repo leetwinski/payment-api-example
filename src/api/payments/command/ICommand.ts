@@ -1,5 +1,5 @@
-import ICloneable from "./ICloneable";
+import ICloneable from './ICloneable'
 
 export default interface ICommand<TResult, TCtx> extends ICloneable {
-  exec(ctx: TCtx): PromiseLike<TResult>;
+  exec (ctx: TCtx): PromiseLike<TResult>
 }

@@ -1,11 +1,11 @@
-import { ErrorCode } from "../apitype";
+import { ErrorCode } from '../apitype'
 
 export default class ApiError extends Error {
-  constructor(readonly code: ErrorCode, readonly message: string) {
-    super(message);
-  }
 
-  static fromJson(errData: {code: ErrorCode, message: string}) {
-    return new ApiError(errData.code, errData.message);
+  public static fromJson (errData: {code: ErrorCode, message: string}) {
+    return new ApiError(errData.code, errData.message)
+  }
+  constructor (readonly code: ErrorCode, readonly message: string) {
+    super(message)
   }
 }

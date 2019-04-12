@@ -1,25 +1,25 @@
-import ApiRequestCommandFactory from "./command/impl/ApiRequestCommandFactory";
-import AuthenticationHolder from "./service/impl/AuthenticationHolder";
-import { IAuthService } from "./service/IAuthService";
-import AuthService from "./service/impl/AuthService";
-import { AuthRequest, AuthResponse, CreatePaymentRequest, PaymentResponse } from "./apitype";
-import IPaymentService from "./service/IPaymentService";
-import { always } from "./util/func";
-import PaymentService from "./service/impl/PaymentService";
+import { AuthRequest, AuthResponse, CreatePaymentRequest, PaymentResponse } from './apitype'
+import ApiRequestCommandFactory from './command/impl/ApiRequestCommandFactory'
+import { IAuthService } from './service/IAuthService'
+import AuthenticationHolder from './service/impl/AuthenticationHolder'
+import AuthService from './service/impl/AuthService'
+import PaymentService from './service/impl/PaymentService'
+import IPaymentService from './service/IPaymentService'
+import { always } from './util/func'
 
 export default class Api {
-  private readonly auth: AuthenticationHolder;
-  private readonly authService: IAuthService;
-  readonly payment: IPaymentService;
-  
-  constructor(baseUrl: string, private user: string, private password: string) {
-    this.auth = new AuthenticationHolder();
+  public readonly payment: IPaymentService
+  private readonly auth: AuthenticationHolder
+  private readonly authService: IAuthService
 
-    const cmdFac = new ApiRequestCommandFactory(baseUrl, this.auth);
+  constructor (baseUrl: string, private user: string, private password: string) {
+    this.auth = new AuthenticationHolder()
+
+    const cmdFac = new ApiRequestCommandFactory(baseUrl, this.auth)
 
     this.authService = new AuthService(
       cmdFac.create(always('authenticate'), 'POST')
-    );
+    )
 
     this.payment = new PaymentService(
       cmdFac.create(always('payments'), 'POST'),
@@ -30,15 +30,15 @@ export default class Api {
     )
   }
 
-  async authenticate(): Promise<boolean> {
-    const res = await this.authService.authenticate({username: this.user, password: this.password});
+  public async authenticate (): Promise<boolean> {
+    const res = await this.authService.authenticate({ username: this.user, password: this.password })
 
-    this.auth.auth = res.unwrap();
+    this.auth.auth = res.unwrap()
 
-    return true;
+    return true
   }
 
-  discardAuth(): void {
-    this.auth.reset();
+  public discardAuth (): void {
+    this.auth.reset()
   }
 }
