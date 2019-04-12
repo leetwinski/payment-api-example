@@ -2,14 +2,14 @@ import ICommand from "../ICommand";
 
 export default class PreExecFilterCommand<TResult, TCtx> implements ICommand<TResult, TCtx> {
   constructor(
-    private innerCmd: ICommand<TResult, TCtx>,
     private filter: (ctx: TCtx) => boolean,
-    private defaultResult: TResult
+    private defaultResult: TResult,
+    private innerCmd: ICommand<TResult, TCtx>
   ) {}
 
   clone(): this {
     return new PreExecFilterCommand(
-      this.innerCmd.clone(), this.filter, this.defaultResult
+      this.filter, this.defaultResult, this.innerCmd.clone()
     ) as this;
   }
 

@@ -4,8 +4,8 @@ export default class PrePostConversionsCommand<TResult, TCtx, TInnerResult, TInn
   implements ICommand<TResult, TCtx> {
 
     constructor(
-      private cmd: ICommand<TInnerResult, TInnerCtx>,
       private preConverter: (ctx: TCtx) => TInnerCtx,
+      private cmd: ICommand<TInnerResult, TInnerCtx>,      
       private postConverter: (result: TInnerResult) => TResult
     ) {}
 
@@ -18,6 +18,6 @@ export default class PrePostConversionsCommand<TResult, TCtx, TInnerResult, TInn
 
     clone(): this {
       return new PrePostConversionsCommand(
-        this.cmd.clone(), this.preConverter, this.postConverter) as this;
+        this.preConverter, this.cmd.clone(), this.postConverter) as this;
     }
   }

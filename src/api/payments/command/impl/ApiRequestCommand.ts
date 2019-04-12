@@ -9,7 +9,7 @@ export default class ApiRequestCommand<TRequest, THeaders, TResponse>
   implements ICommand<ApiResult<TResponse>, IApiRequestContext<TRequest, THeaders>> {
 
     constructor(
-      private method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+      private method: 'GET' | 'POST' | 'PUT',
       private baseUrl: string,
       private uri: string) {}
 
