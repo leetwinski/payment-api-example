@@ -11,17 +11,16 @@ export default class ApiRequestCommand<TRequest, THeaders, TResponse>
     constructor(
       private method: 'GET' | 'POST' | 'PUT' | 'DELETE',
       private baseUrl: string,
-      private uri: string,
-      public ctx: IApiRequestContext<TRequest, THeaders>) {}
+      private uri: string) {}
 
-    exec(): PromiseLike<ApiResult<TResponse>> {
+    exec(ctx: IApiRequestContext<TRequest, THeaders>): PromiseLike<ApiResult<TResponse>> {
       const opts = {
         baseUrl: this.baseUrl,
         uri: this.uri,
         method: this.method,
         json: true,
-        headers: this.ctx.headers,
-        body: this.ctx.body,
+        headers: ctx.headers,
+        body: ctx.body,
         simple: false,
         resolveWithFullResponse: true
       };
@@ -37,11 +36,6 @@ export default class ApiRequestCommand<TRequest, THeaders, TResponse>
     }
 
     clone(): this {
-      return new ApiRequestCommand(this.method, this.baseUrl, this.uri, this.ctx) as this;
-    }
-
-    withCtx(ctx: IApiRequestContext<TRequest, THeaders>): this {
-      this.ctx = ctx;
-      return this;
+      return new ApiRequestCommand(this.method, this.baseUrl, this.uri) as this;
     }
   }

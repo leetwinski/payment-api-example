@@ -12,7 +12,7 @@ export default class AuthService implements IAuthService {
       return this.currentAuthPromise;
     }
 
-    this.currentAuthPromise = this.cmd.clone().withCtx(req).exec();
+    this.currentAuthPromise = this.cmd.clone().exec(req);
 
     return this.currentAuthPromise;
   }

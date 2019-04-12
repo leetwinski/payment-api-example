@@ -15,6 +15,6 @@ export default class PaymentService extends CommandBasedRepoService<PaymentRespo
   }
 
   approve(id: string): PromiseLike<ApiResult<void>> {
-    return this.approveCommand.clone().withCtx(id).exec();
+    return this.approveCommand.clone().exec(id);
   }
 }

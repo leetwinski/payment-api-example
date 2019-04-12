@@ -2,7 +2,6 @@ import ICommand from "../ICommand";
 
 export default class PreExecFilterCommand<TResult, TCtx> implements ICommand<TResult, TCtx> {
   constructor(
-    public ctx: TCtx,
     private innerCmd: ICommand<TResult, TCtx>,
     private filter: (ctx: TCtx) => boolean,
     private defaultResult: TResult
@@ -10,20 +9,15 @@ export default class PreExecFilterCommand<TResult, TCtx> implements ICommand<TRe
 
   clone(): this {
     return new PreExecFilterCommand(
-      this.ctx, this.innerCmd.clone(), this.filter, this.defaultResult
+      this.innerCmd.clone(), this.filter, this.defaultResult
     ) as this;
   }
 
-  exec(): PromiseLike<TResult>  {
-    if (this.filter(this.ctx) === true) {
-      return this.innerCmd.exec();
+  exec(ctx: TCtx): PromiseLike<TResult>  {
+    if (this.filter(ctx) === true) {
+      return this.innerCmd.exec(ctx);
     }
 
     return Promise.resolve(this.defaultResult)
-  }
-
-  withCtx(ctx: TCtx): this {
-    this.ctx = ctx;
-    return this;
   }
 }
