@@ -8,8 +8,8 @@ import { always } from "./util/func";
 import PaymentService from "./service/impl/PaymentService";
 
 export default class Api {
-  private auth: AuthenticationHolder;
-  private authService: IAuthService;
+  private readonly auth: AuthenticationHolder;
+  private readonly authService: IAuthService;
   readonly payment: IPaymentService;
   
   constructor(baseUrl: string, private user: string, private password: string) {
