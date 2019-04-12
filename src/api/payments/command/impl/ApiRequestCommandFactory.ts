@@ -26,7 +26,5 @@ export default class ApiRequestCommandFactory {
   //   method: 'GET' | 'POST' | 'PUT',
   // ): ApiRequestCommand<TRequest, Headers, TResult> {
   //   // TODO: complete
-  // }
-
-  
+  // } 
 }
