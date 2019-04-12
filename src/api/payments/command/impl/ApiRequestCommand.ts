@@ -11,12 +11,12 @@ export default class ApiRequestCommand<TRequest, THeaders, TResponse>
     constructor(
       private method: 'GET' | 'POST' | 'PUT',
       private baseUrl: string,
-      private uri: string) {}
+      private makeUri: (req: TRequest) => string) {}
 
     exec(ctx: IApiRequestContext<TRequest, THeaders>): PromiseLike<ApiResult<TResponse>> {
       const opts = {
         baseUrl: this.baseUrl,
-        uri: this.uri,
+        uri: this.makeUri(ctx.body),
         method: this.method,
         json: true,
         headers: ctx.headers,
@@ -36,6 +36,6 @@ export default class ApiRequestCommand<TRequest, THeaders, TResponse>
     }
 
     clone(): this {
-      return new ApiRequestCommand(this.method, this.baseUrl, this.uri) as this;
+      return new ApiRequestCommand(this.method, this.baseUrl, this.makeUri) as this;
     }
   }

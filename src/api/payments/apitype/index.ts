@@ -10,7 +10,7 @@ export interface ErrorResponse {
 
 export interface AuthRequest {
   readonly username: string;
-  readonly passwort: string;
+  readonly password: string;
 }
 
 export interface AuthResponse {

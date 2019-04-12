@@ -28,7 +28,7 @@ export default class ApiRequestCommandFactory {
   }
   
   create<TRequest, TResult>(
-    uri: string,
+    makeUri: (ctx: TRequest) => string,
     method: 'GET' | 'POST' | 'PUT',
   ): ICommand<ApiResult<TResult>, TRequest> {
     return new PreExecFilterCommand(
@@ -36,7 +36,7 @@ export default class ApiRequestCommandFactory {
       Result.err<TResult, ApiError>(new ApiError("ERR_AUTH_TOKEN_EXPIRED", "Auth token expired")),
       new PrePostConversionsCommand(
         (ctx: TRequest) => this.makeCtx(ctx),
-        new ApiRequestCommand<TRequest, Headers, TResult>(method, this.baseUrl, uri),
+        new ApiRequestCommand<TRequest, Headers, TResult>(method, this.baseUrl, makeUri),
         identity
       )
     );
