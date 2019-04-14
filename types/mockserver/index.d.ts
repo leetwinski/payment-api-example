@@ -1,5 +1,6 @@
 import { RequestListener } from 'http';
 
-declare function mockserver(mocksPath: string): RequestListener
+type Lib = any;
+// declare function mockserver(mocksPath: string): RequestListener
 
-export default mockserver
+export default Lib;
