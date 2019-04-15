@@ -1,4 +1,4 @@
-import * as request from 'request-promise'
+import request from 'request-promise'
 import { ApiResult } from '../../apitype'
 import AppError from '../../error/ApiError'
 import Result from '../../util/Result'

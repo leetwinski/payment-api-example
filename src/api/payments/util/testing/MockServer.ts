@@ -1,11 +1,9 @@
 import { createServer as mkServer, Server } from "http"
-import * as mockserver from 'mockserver'
-
-const getSrv = (path: string) => (mockserver as any)(path);
+import mockserver from 'mockserver'
 
 export function createServer(port: number, mocksPath: string): Promise<Server> {
   return new Promise((resolve, reject) => {    
-    const server = mkServer(getSrv(mocksPath));
+    const server = mkServer((mockserver as any)(mocksPath));
 
     server.once('listening', () => resolve(server))
 

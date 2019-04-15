@@ -10,6 +10,7 @@
     "moduleResolution": "node",
     "typeRoots": [ "./types", "./node_modules/@types"],
     "baseUrl": "./",
+    "esModuleInterop": true,
     "paths": {
       "*" : ["types/*"]
     }    

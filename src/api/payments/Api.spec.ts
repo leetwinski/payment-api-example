@@ -1,10 +1,10 @@
 // tslint:disable no-unused-expression
 
-import * as chai from 'chai'
-import * as chaiAsPromised from 'chai-as-promised';
+import chai from 'chai'
+import chaiAsPromised from 'chai-as-promised';
 import { Server } from 'http';
 import Api from './Api'
-import { ApiResult, PaymentResponse } from './apitype';
+import { ApiResult } from './apitype';
 import { closeServer, createServer } from './util/testing/MockServer';
 
 const expect = chai.use(chaiAsPromised).expect;
