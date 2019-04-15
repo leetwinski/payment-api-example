@@ -1,0 +1,7 @@
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "authToken": "fJizPj8LxL3eKOy1GEIMPcdPQqgxN42oprukdHLu8jgbV",
+  "expiresIn": "2030-01-22T11:26:14.805Z"
+}

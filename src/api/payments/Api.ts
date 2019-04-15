@@ -18,7 +18,7 @@ export default class Api {
     const cmdFac = new ApiRequestCommandFactory(baseUrl, this.auth)
 
     this.authService = new AuthService(
-      cmdFac.create(always('authenticate'), 'POST')
+      cmdFac.create(always('authenticate'), 'POST', false)
     )
 
     this.payment = new PaymentService(
@@ -32,8 +32,8 @@ export default class Api {
 
   public async authenticate (): Promise<boolean> {
     const res = await this.authService.authenticate({ username: this.user, password: this.password })
-
-    this.auth.auth = res.unwrap()
+    
+    this.auth.updateAuth(res.unwrap())
 
     return true
   }

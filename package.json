@@ -4,7 +4,7 @@
   "description": "simple payments api example",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register src/**/*.spec.ts",
     "build": "npx tsc",
     "typecheck": "npx tsc --noemit",
     "tslint": "npx tslint --project ."
@@ -17,14 +17,22 @@
   "author": "leetwin",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/mocha": "^5.2.6",
     "@types/request-promise": "^4.1.42",
     "husky": "^1.3.1",
+    "mocha": "^6.1.3",
     "ts-node": "^8.0.3",
     "tslint": "^5.15.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.3"
   },
   "dependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mockserver": "^3.0.0",
+    "request": "^2.88.0",
     "request-promise": "^4.2.4"
   }
 }
