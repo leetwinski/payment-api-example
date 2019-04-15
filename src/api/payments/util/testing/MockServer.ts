@@ -3,7 +3,7 @@ import mockserver from 'mockserver'
 
 export function createServer(port: number, mocksPath: string): Promise<Server> {
   return new Promise((resolve, reject) => {    
-    const server = mkServer((mockserver as any)(mocksPath));
+    const server = mkServer(mockserver(mocksPath));
 
     server.once('listening', () => resolve(server))
 
