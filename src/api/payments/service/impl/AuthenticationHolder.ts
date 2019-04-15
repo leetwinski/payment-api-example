@@ -1,10 +1,16 @@
 import { AuthResponse } from '../../apitype'
 
 export default class AuthenticationHolder {
+  public auth: AuthResponse | null
   private expiration: number
 
-  constructor (public auth: AuthResponse | null = null, private thresholdMillis: number = 1000) {
+  constructor (auth: AuthResponse | null = null, private thresholdMillis: number = 1000) {
+    this.updateAuth(auth)
+  }
+
+  public updateAuth(auth: AuthResponse): void {
     this.expiration = auth ? Date.parse(auth.expiresIn) : -1
+    this.auth = auth
   }
 
   public isOutdated (): boolean {
@@ -12,7 +18,6 @@ export default class AuthenticationHolder {
   }
 
   public reset (): void {
-    this.expiration = -1
-    this.auth = null
+    this.updateAuth(null)
   }
 }

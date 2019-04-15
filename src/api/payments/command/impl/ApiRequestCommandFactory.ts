@@ -11,7 +11,7 @@ import PrePostConversionsCommand from './PrePostConversionsCommand'
 
 // tslint:disable-next-line:interface-name
 interface Headers {
-  readonly Bearer: string
+  readonly Bearer?: string
 }
 
 export default class ApiRequestCommandFactory {
@@ -19,27 +19,36 @@ export default class ApiRequestCommandFactory {
 
   public create<TRequest, TResult> (
     makeUri: (ctx: TRequest) => string,
-    method: 'GET' | 'POST' | 'PUT'
+    method: 'GET' | 'POST' | 'PUT',
+    checkAuth: boolean = true
   ): ICommand<ApiResult<TResult>, TRequest> {
-    return new PreExecFilterCommand(
-      (_: TRequest) => this.checkAuth(),
-      Result.err<TResult, ApiError>(new ApiError('ERR_AUTH_TOKEN_EXPIRED', 'Auth token expired')),
-      new PrePostConversionsCommand(
-        (ctx: TRequest) => this.makeCtx(ctx),
-        new ApiRequestCommand<TRequest, Headers, TResult>(method, this.baseUrl, makeUri),
-        identity
-      )
+    const innerCmd = new PrePostConversionsCommand(
+      (ctx: TRequest) => this.makeCtx(ctx),
+      new ApiRequestCommand<TRequest, Headers, TResult>(method, this.baseUrl, makeUri),
+      identity
     )
+
+    if (checkAuth) {
+      return new PreExecFilterCommand(
+        (_: TRequest) => this.checkAuth(),
+        Result.err<TResult, ApiError>(new ApiError('ERR_AUTH_TOKEN_EXPIRED', 'Auth token expired')),
+        innerCmd
+      )
+    }
+
+    return innerCmd
   }
 
   private makeCtx<TRequest> (req: TRequest): IApiRequestContext<TRequest, Headers> {
+    const headers = this.auth.auth === null ? {} : { Bearer: this.auth.auth.authToken }
+    
     return {
       body: req,
-      headers: { Bearer: this.auth.auth.authToken }
+      headers
     }
   }
 
   private checkAuth (): boolean {
-    return !this.auth.isOutdated
+    return !this.auth.isOutdated()
   }
 }
