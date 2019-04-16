@@ -1,11 +1,14 @@
+import AbstractCommand from '../AbstractCommand';
 import ICommand from '../ICommand'
 
-export default class PreExecFilterCommand<TResult, TCtx> implements ICommand<TResult, TCtx> {
+export default class PreExecFilterCommand<TResult, TCtx> extends AbstractCommand<TResult, TCtx> {
   constructor (
     private filter: (ctx: TCtx) => boolean,
     private defaultResult: TResult,
     private innerCmd: ICommand<TResult, TCtx>
-  ) {}
+  ) {
+    super()
+  }
 
   public clone (): this {
     return new PreExecFilterCommand(
@@ -13,7 +16,7 @@ export default class PreExecFilterCommand<TResult, TCtx> implements ICommand<TRe
     ) as this
   }
 
-  public exec (ctx: TCtx): PromiseLike<TResult> {
+  protected doExec (ctx: TCtx): PromiseLike<TResult> {
     if (this.filter(ctx) === true) {
       return this.innerCmd.exec(ctx)
     }

@@ -2,22 +2,25 @@ import request from 'request-promise'
 import { ApiResult } from '../../apitype'
 import AppError from '../../error/ApiError'
 import Result from '../../util/Result'
-import ICommand from '../ICommand'
+import AbstractCommand from '../AbstractCommand';
 import IApiRequestContext from './IApiRequestContext'
 
 export default class ApiRequestCommand<TRequest, THeaders, TResponse>
-  implements ICommand<ApiResult<TResponse>, IApiRequestContext<TRequest, THeaders>> {
+  extends AbstractCommand<ApiResult<TResponse>, IApiRequestContext<TRequest, THeaders>> {
 
     constructor (
       private method: 'GET' | 'POST' | 'PUT',
       private baseUrl: string,
-      private makeUri: (req: TRequest) => string) {}
+      private makeUri: (req: TRequest) => string) {
+
+      super()
+    }
 
     public clone (): this {
       return new ApiRequestCommand(this.method, this.baseUrl, this.makeUri) as this
     }
 
-    public exec (ctx: IApiRequestContext<TRequest, THeaders>): PromiseLike<ApiResult<TResponse>> {
+    protected doExec(ctx: IApiRequestContext<TRequest, THeaders>): PromiseLike<ApiResult<TResponse>> {
       const opts = {
         baseUrl: this.baseUrl,
         body: ctx.body,
